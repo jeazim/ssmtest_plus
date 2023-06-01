@@ -1,0 +1,106 @@
+/*背景图片*/
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("../page/about.gif");
+    background-size: cover;
+    z-index: -1; /* 将z-index设为-1 */
+}
+
+
+/* 导航栏样式 */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    background-color: #333;
+    color: #fff;
+    padding: 0 20px;
+}
+
+/* 左侧导航区域样式 */
+.navbar-left a {
+    margin-right: 20px;
+    color: #fff;
+    text-decoration: none;
+}
+
+/* 右侧导航区域样式 */
+.navbar-right .like-button {
+    background-color: #fff;
+    border: none;
+    color: #333;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* 鼠标悬停在导航栏选项上时的样式 */
+.navbar-left a:hover {
+    background-color: #f2f2f2;
+    color: #333;
+    border-radius: 5px;
+}
+/* 页面主体内容样式 */
+.page-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.page-content h1 {
+    font-size: 36px;
+    margin-top: 50px;
+}
+
+.page-content h2 {
+    font-size: 24px;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+.page-content p {
+    font-size: 18px;
+    line-height: 1.5;
+    margin: 0 auto 15px;
+    max-width: 600px;
+}
+
+.page-content ul {
+    font-size: 18px;
+    text-align: left;
+    margin: 0 auto 30px;
+    max-width: 600px;
+    padding-left: 40px;
+}
+
+.page-content li {
+    margin-bottom: 10px;
+}
+
+/* 联系方式列表样式 */
+/*.page-content ul li:nth-child(1)::before {*/
+/*    content: "电话：";*/
+/*}*/
+
+/*.page-content ul li:nth-child(2)::before {*/
+/*    content: "邮箱：";*/
+/*}*/
+
+/*.page-content ul li:nth-child(3)::before {*/
+/*    content: "地址：";*/
+/*}*/
+
+/* 动画效果样式 */
+.animated {
+    opacity: 0;
+    transition: opacity 0.5s ease-out;
+}
+
+.visible {
+    opacity: 1;
+}
