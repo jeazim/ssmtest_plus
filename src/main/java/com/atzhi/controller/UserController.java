@@ -32,7 +32,7 @@ public class UserController {
 //        return user.getUsername();
 //    }
 
-    //获取用户名
+    //获取用户权限
     @GetMapping("/get_pri")
     @ResponseBody
     public int get_pri(HttpSession session)  {
@@ -41,7 +41,7 @@ public class UserController {
         return user.getPri();
     }
 
-    // 获取用户权限
+    // 获取用户名
     @GetMapping("/get_name")
     @ResponseBody
     public String get_name(HttpSession session)  {
@@ -53,13 +53,13 @@ public class UserController {
     @GetMapping("/login_page")
     public String login_page() {
         //System.out.println("success");
-        return "login";
+        return "login.html";
     }
     //注册界面
     @GetMapping("/register_page")
     public String register_page()
     {
-        return "register";
+        return "register.html";
     }
     //退出并返回登录页面
     @GetMapping("/exit_page")

@@ -7,6 +7,7 @@ import com.atzhi.service.CourseService;
 import com.atzhi.service.FeedbackService;
 import com.atzhi.service.SchoolService;
 import com.atzhi.pojo.Result;
+import com.atzhi.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.poi.ss.usermodel.*;
@@ -17,6 +18,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -39,6 +41,11 @@ public class CourseController {
     private SchoolService schoolService;
     @Autowired
     private FeedbackService feedbackService;
+    @Autowired
+    UserService userService;
+
+    String name;
+
 
     //返回主页面
     @GetMapping("/main_page")
@@ -51,7 +58,7 @@ public class CourseController {
         }else{
             User user = (User) session.getAttribute("user");
             System.out.println(user);
-            return "main";
+            return "main.html";
         }
     }
     //新增课程页面
@@ -64,7 +71,7 @@ public class CourseController {
         }else{
             User user = (User) session.getAttribute("user");
             System.out.println(user);
-            return "add";
+            return "add.html";
         }
     }
     //修改课程页面
@@ -80,31 +87,33 @@ public class CourseController {
             System.out.println(course);
             //System.out.println("1111111111111111111111111111111111111");
             session.setAttribute("course", course);
-            return "update";
+            return "update.html";
         }
     }
 
 
     //菜单界面
     @GetMapping("/menu_page")
-    public String menu_page(){return "menu";}
+    public String menu_page(){return "menu.html";}
 
     @GetMapping("/statistics_page")
     public String statistics_page() {
-        return "statistics";
+        return "statistics.html";
     }
     @GetMapping("/exportToExcel_page")
     public String exportToExcel_page() {
-        return "exportToExcel";
+        return "exportToExcel.html";
     }
 
     @GetMapping("/about_page")
     public String about_page() {
-        return "about";
+        return "about.html";
     }
     @GetMapping("/chat_page")
-    public String chat_page() {
-        return "chat";
+    public String chat_page(HttpSession session)
+    {
+        session.setAttribute("name",name);
+        return "userchat.jsp";
     }
 
 

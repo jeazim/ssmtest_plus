@@ -28,7 +28,7 @@ public class SpringMvcConfig implements WebMvcConfigurer {
     public ViewResolver viewResolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
         resolver.setPrefix("/WEB-INF/");//配置前缀
-        resolver.setSuffix(".html");//配置后缀
+        resolver.setSuffix("");//配置后缀
         return resolver;
     }
    // 访问静态资源

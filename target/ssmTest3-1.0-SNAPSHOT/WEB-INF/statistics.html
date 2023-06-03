@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <!--    以让网页更加适应于不同的移动设备，并提供更好的用户体验-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 禁用浏览器缓存-->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- 引入 Magnific Popup 相关文件,实现图片放大 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+
+    <title>课程统计图</title>
+    <!-- 引入CSS文件 -->
+    <link rel="stylesheet" href="../css/statistics.css">
+    <link rel="stylesheet" href="../css/menu.css">
+</head>
+<body>
+<div class="background"></div>
+<!-- 导航栏容器 -->
+<nav class="navbar">
+    <div class="navbar-left">
+        <a href="/course/menu_page">菜单首页</a>
+        <a href="/course/statistics_page">课时统计图</a>
+        <a href="/course/exportToExcel_page">导出Excel</a>
+        <a href="/course/chat_page">反馈</a>
+        <a href="/course/about_page">关于我们</a>
+        <a href="/course/main_page">返回</a>
+    </div>
+    <div class="navbar-right">
+        <button class="like-button">点赞</button>
+        <div class="heart-container"></div>
+    </div>
+</nav>
+<!-- 菜单容器 -->
+<div id="menu-container">
+</div>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script>
+
+    // 发起 AJAX 请求获取表格数据
+    $(document).ready(function(){
+        $.ajax({
+            url: '/course/highcharts_solve',
+            method: 'GET',
+            contentType:'application/json;charset=utf-8',
+            success: function(result) {
+                var courses = result.data;
+                // console.log(courses)
+                // if (!Array.isArray(courses)) {
+                //     console.error("data is not an array.");
+                //     return;
+                // }
+
+                Highcharts.chart('menu-container', {
+                    chart: {
+                        type: 'column'
+                    },
+                    title: {
+                        text: '课时柱状分布图'
+                    },
+                    xAxis: {
+                        categories: courses.map(function(course) {
+                            return course.name;
+                        })
+                    },
+                    yAxis: {
+                        title: {
+                            text: '课时 (个)'
+                        }
+                    },
+                    series: [{
+                        name: '课时',
+                        data: courses.map(function(course) {
+                            return course.hours;
+                        })
+                    }]
+                });
+            },
+            error: function() {
+                // 请求失败
+                console.error('请求失败');
+            }
+        });
+    })
+</script>
+<script src="../js/menu.js"></script>
+</body>
+</html>
